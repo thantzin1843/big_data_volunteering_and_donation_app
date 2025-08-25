@@ -1,10 +1,20 @@
-import express from 'express';
-import { createActivity, getActivityDetail, getAllActivities } from '../controllers/activityController.js';
+// backend/routes/activityRouter.js
+import { Router } from "express";
+import {
+  createActivity,
+  getAllActivities,
+  getActivityDetail,
+} from "../controllers/activityController.js";
 
-const activityRouter = express.Router();
+const router = Router();
 
-activityRouter.post('/', createActivity);
-activityRouter.get('/', getAllActivities);// get all activities
-activityRouter.get('/:id', getActivityDetail);// get all activities
+// POST /api/activities  (org creates — starts pending)
+router.post("/", createActivity);
 
-export default activityRouter
+// GET /api/activities?org_id=...&approval=approved&status=upcoming
+router.get("/", getAllActivities);
+
+// GET /api/activities/:id
+router.get("/:id", getActivityDetail);
+
+export default router;
